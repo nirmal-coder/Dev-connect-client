@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.login-bg-container {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.938),
+      rgba(4, 4, 4, 0.936)
+    ),
+    url("./assets/undraw_connected-world_anke.svg");
+  background-size: cover;
+  background-position: center;
+}
+
+button {
+  cursor: pointer;
+}
