@@ -6,7 +6,6 @@ import { useState } from "react";
 
 const Login = ({ setShowLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
-
   const handleShowPassword = (e) => {
     e.preventDefault();
     setShowPassword((prev) => !prev);
