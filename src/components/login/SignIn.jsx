@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import * as yup from "yup";
+import FormInput from "./FormInput";
 import { useForm } from "react-hook-form";
 
 const SignIn = ({ setShowLogin }) => {
@@ -14,14 +15,37 @@ const SignIn = ({ setShowLogin }) => {
     formState: { errors },
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [serverErrorMsg, setServerErrorMsg] = useState("");
 
   const handleShowPassword = (e) => {
     e.preventDefault();
     setShowPassword((prev) => !prev);
   };
 
-  const handleLogin = (data) => {
-    console.log(data);
+  const handleLogin = async (signinData) => {
+    console.log(signinData);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+
+      body: JSON.stringify({ ...signinData }),
+    };
+    const url = "http://localhost:1207/signin";
+
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setServerErrorMsg("");
+      } else {
+        throw new Error("Response was not ok!");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
@@ -37,50 +61,48 @@ const SignIn = ({ setShowLogin }) => {
       />
       <div className="w-11/12 flex items-center justify-between">
         <div className="w-6/12 flex flex-col p-2">
-          <label htmlFor="firstName" className="text-white font-semibold ">
-            First name*
-          </label>
-          <input
+          <FormInput
+            label="*First name:"
+            name="firstName"
             type="text"
-            {...register("firstName", {
+            register={register}
+            validation={{
               required: "First name is required!",
-              minLength: 3,
-            })}
-            id="firstName"
-            className="w-full h-[30px] md:h-[40px] outline-none bg-transparent rounded-sm border border-gray-300 pl-3 text-white mt-2"
+              minLength: { value: 3, message: "Minimum 3 characters" },
+            }}
+            error={errors.firstName}
           />
-          <p className="ErrorMsg">{errors.firstName?.message}</p>
         </div>
         <div className="w-6/12 flex flex-col p-2">
-          <label htmlFor="lastName" className="text-white font-semibold ">
-            last name*
-          </label>
-          <input
+          <FormInput
+            label="*Last name:"
+            name="lastName"
             type="text"
-            {...register("lastName", { required: "Last name is required!" })}
-            id="lastName"
-            className="w-full h-[30px] md:h-[40px] outline-none bg-transparent rounded-sm border border-gray-300 pl-3 text-white mt-2"
+            register={register}
+            validation={{
+              required: "Last name is required!",
+              minLength: { value: 3, message: "Minimum 3 characters!" },
+              maxLength: { value: 25, message: "maximum 25 characters!" },
+            }}
+            error={errors.lastName}
           />
-          <p className="ErrorMsg">{errors.lastName?.message}</p>
         </div>
       </div>
       <div className="w-11/12 flex flex-col p-2">
-        <label htmlFor="EmailId" className="text-white font-semibold ">
-          Email*
-        </label>
-        <input
+        <FormInput
+          label="Email :"
+          name="emailId"
           type="email"
-          {...register("emailId", {
+          register={register}
+          validation={{
             required: "Email Id is required!",
             pattern: {
-              value: "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/",
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,
               message: "Email format is Invalid!",
             },
-          })}
-          id="EmailId"
-          className="w-full h-[30px] md:h-[40px] outline-none bg-transparent rounded-sm border border-gray-300 pl-3 text-white mt-2"
+          }}
+          error={errors.emailId}
         />
-        <p className="ErrorMsg">{errors.emailId?.message}</p>
       </div>
       <div className="w-11/12 flex flex-col p-2">
         <label htmlFor="password" className="text-white font-semibold ">
@@ -93,7 +115,7 @@ const SignIn = ({ setShowLogin }) => {
               required: "Password is required!",
               pattern: {
                 value:
-                  "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$",
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                 message:
                   "Enter Strong password with least 8 characters, uppercase, lowercase, number, and special character",
               },
