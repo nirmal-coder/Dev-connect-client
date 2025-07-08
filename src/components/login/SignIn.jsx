@@ -3,10 +3,10 @@ import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
 import linkedInLogo from "../../assets/linkedIn.png";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
-import useFetch from "../../hooks/useFetch";
-import * as yup from "yup";
+
 import FormInput from "./FormInput";
 import { useForm } from "react-hook-form";
+import PasswordInput from "./passwordInput";
 
 const SignIn = ({ setShowLogin }) => {
   const {
@@ -14,13 +14,8 @@ const SignIn = ({ setShowLogin }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [showPassword, setShowPassword] = useState(false);
-  const [serverErrorMsg, setServerErrorMsg] = useState("");
 
-  const handleShowPassword = (e) => {
-    e.preventDefault();
-    setShowPassword((prev) => !prev);
-  };
+  const [serverErrorMsg, setServerErrorMsg] = useState("");
 
   const handleLogin = async (signinData) => {
     console.log(signinData);
@@ -59,38 +54,38 @@ const SignIn = ({ setShowLogin }) => {
         alt="website logo"
         className="w-52 md:w-60 h-[60px] mx-auto mb-5"
       />
-      <div className="w-11/12 flex items-center justify-between">
-        <div className="w-6/12 flex flex-col p-2">
-          <FormInput
-            label="*First name:"
-            name="firstName"
-            type="text"
-            register={register}
-            validation={{
-              required: "First name is required!",
-              minLength: { value: 3, message: "Minimum 3 characters" },
-            }}
-            error={errors.firstName}
-          />
-        </div>
-        <div className="w-6/12 flex flex-col p-2">
-          <FormInput
-            label="*Last name:"
-            name="lastName"
-            type="text"
-            register={register}
-            validation={{
-              required: "Last name is required!",
-              minLength: { value: 3, message: "Minimum 3 characters!" },
-              maxLength: { value: 25, message: "maximum 25 characters!" },
-            }}
-            error={errors.lastName}
-          />
-        </div>
-      </div>
       <div className="w-11/12 flex flex-col p-2">
+        <div className="w-full flex items-center justify-between">
+          <div className="w-6/12 flex flex-col">
+            <FormInput
+              label="*First name:"
+              name="firstName"
+              type="text"
+              register={register}
+              validation={{
+                required: "First name is required!",
+                minLength: { value: 3, message: "Minimum 3 characters" },
+              }}
+              error={errors.firstName}
+            />
+          </div>
+          <div className="w-6/12 flex flex-col">
+            <FormInput
+              label="*Last name:"
+              name="lastName"
+              type="text"
+              register={register}
+              validation={{
+                required: "Last name is required!",
+                minLength: { value: 3, message: "Minimum 3 characters!" },
+                maxLength: { value: 25, message: "maximum 25 characters!" },
+              }}
+              error={errors.lastName}
+            />
+          </div>
+        </div>
         <FormInput
-          label="Email :"
+          label="*Email : "
           name="emailId"
           type="email"
           register={register}
@@ -103,35 +98,21 @@ const SignIn = ({ setShowLogin }) => {
           }}
           error={errors.emailId}
         />
-      </div>
-      <div className="w-11/12 flex flex-col p-2">
-        <label htmlFor="password" className="text-white font-semibold ">
-          Password*
-        </label>
-        <div className="w-full flex justify-between gap-x-2 items-center rounded-sm border border-gray-300 mt-2 px-3">
-          <input
-            type={showPassword ? "text" : "password"}
-            {...register("password", {
-              required: "Password is required!",
-              pattern: {
-                value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                message:
-                  "Enter Strong password with least 8 characters, uppercase, lowercase, number, and special character",
-              },
-            })}
-            id="password"
-            className="w-10/12 h-[30px] md:h-[40px] outline-none bg-transparent  pl-3 text-white "
-          />
-          <button onClick={handleShowPassword}>
-            {showPassword ? (
-              <FaEyeSlash className="text-xl text-gray-300" />
-            ) : (
-              <FaEye className="text-xl text-gray-300" />
-            )}
-          </button>
-        </div>
-        <p className="ErrorMsg">{errors.password?.message}</p>
+        <PasswordInput
+          label="*Password"
+          name="password"
+          register={register}
+          validation={{
+            required: "Password is required!",
+            pattern: {
+              value:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+              message:
+                "Enter Strong password with least 8 characters, uppercase, lowercase, number, and special character",
+            },
+          }}
+          error={errors.password}
+        />
       </div>
       <button className="bg-red-500 px-7 py-2 text-white rounded-[99px] mt-5 hover:bg-transparent hover:border hover:border-red-500 transition duration-75">
         Signin

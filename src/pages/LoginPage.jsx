@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Login from "./Login";
-import SignIn from "./SignIn";
-import banner from "../../assets/undraw_global-team_8jok.svg";
-import "../../index.css";
+import Login from "../components/login/Login";
+import SignIn from "../components/login/SignIn";
+import banner from "../assets/undraw_global-team_8jok.svg";
+import "../index.css";
 
-const LoginBody = () => {
+const LoginPage = () => {
   const [showLogin, setShowLogin] = useState(false);
 
   return (
@@ -18,4 +18,4 @@ const LoginBody = () => {
   );
 };
 
-export default LoginBody;
+export default LoginPage;

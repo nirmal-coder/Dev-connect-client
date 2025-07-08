@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
-import LoginBody from "./components/login/LoginBody";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginBody />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

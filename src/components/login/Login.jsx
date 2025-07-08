@@ -3,52 +3,78 @@ import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
 import linkedInLogo from "../../assets/linkedIn.png";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import PasswordInput from "./passwordInput";
+import FormInput from "./FormInput";
+import { useForm } from "react-hook-form";
 
 const Login = ({ setShowLogin }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const handleShowPassword = (e) => {
-    e.preventDefault();
-    setShowPassword((prev) => !prev);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const handleLogin = async (data) => {
+    try {
+      const url = "http://localhost:1207/login";
+      const options = {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      };
 
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
-    <form className="w-10/12 bg-[#262B3B] p-3 rounded-md flex flex-col items-center max-w-[450px] py-10 shadow-md">
+    <form
+      className="w-10/12 bg-[#262B3B] p-3 rounded-md flex flex-col items-center max-w-[450px] py-10 shadow-md"
+      onSubmit={handleSubmit(handleLogin)}
+    >
       <img
         src={websiteLogo}
         alt="website logo"
         className="w-52 h-[60px] mx-auto md:w-60 mb-5"
       />
       <div className="w-11/12 flex flex-col p-2">
-        <label htmlFor="EmailId" className="text-white font-semibold ">
-          Email*
-        </label>
-        <input
+        <FormInput
+          label="*Email : "
+          name="emailId"
           type="email"
-          name="Email"
-          id="EmailId"
-          className="w-full h-[30px] md:h-[40px] outline-none bg-transparent rounded-sm border border-gray-300 pl-3 text-white mt-2"
+          register={register}
+          validation={{
+            required: "Email Id is required!",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,
+              message: "Email format is Invalid!",
+            },
+          }}
+          error={errors.emailId}
+        />
+        <PasswordInput
+          label="*Password"
+          name="password"
+          register={register}
+          validation={{
+            required: "Password is required!",
+            pattern: {
+              value:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+              message:
+                "Enter Strong password with least 8 characters, uppercase, lowercase, number, and special character",
+            },
+          }}
+          error={errors.password}
         />
       </div>
-      <div className="w-11/12 flex flex-col p-2">
-        <label htmlFor="password" className="text-white font-semibold ">
-          Password*
-        </label>
-        <div className="w-full flex justify-between gap-x-2 items-center rounded-sm border border-gray-300 mt-2 px-3">
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            id="password"
-            className="w-10/12 h-[30px] md:h-[40px] outline-none bg-transparent  pl-3 text-white "
-          />
-          <button onClick={handleShowPassword}>
-            {showPassword ? (
-              <FaEyeSlash className="text-xl text-gray-300" />
-            ) : (
-              <FaEye className="text-xl text-gray-300" />
-            )}
-          </button>
-        </div>
-      </div>
+
       <button className="bg-red-500 px-7 py-2 text-white rounded-[99px] mt-5 hover:bg-transparent hover:border hover:border-red-500 transition duration-75">
         Login
       </button>
