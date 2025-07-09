@@ -1,8 +1,4 @@
 import websiteLogo from "../../assets/website logo.png";
-import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
-import linkedInLogo from "../../assets/linkedIn.png";
-import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
 import PasswordInput from "./passwordInput";
 import FormInput from "./FormInput";
 import { useForm } from "react-hook-form";

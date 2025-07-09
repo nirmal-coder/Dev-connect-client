@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const PasswordInput = ({
@@ -26,6 +26,7 @@ const PasswordInput = ({
           {...register(name, validation)}
           id="password"
           className="w-10/12 h-[30px] md:h-[40px] outline-none bg-transparent  pl-3 text-white "
+          {...rest}
         />
         <button onClick={handleShowPassword}>
           {showPassword ? (
