@@ -16,7 +16,7 @@ const FormInput = ({
         type={type}
         {...register(name, validation)}
         id={name}
-        className="w-full h-[30px] md:h-[40px] outline-none bg-transparent rounded-sm border border-gray-300 pl-3 text-white mt-1"
+        className="w-full h-[30px] md:h-[40px] outline-none bg-transparent rounded-sm border border-gray-300 pl-1 text-white mt-1"
         {...rest}
       />
       {error && <p className="ErrorMsg">{error.message}</p>}

@@ -6,6 +6,10 @@ import { useState } from "react";
 import PasswordInput from "./passwordInput";
 import FormInput from "./FormInput";
 import { useForm } from "react-hook-form";
+import SocialAcccounts from "./SocialAcccounts";
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../../store/userSlice";
+import { useNavigate } from "react-router";
 
 const Login = ({ setShowLogin }) => {
   const {
@@ -13,6 +17,8 @@ const Login = ({ setShowLogin }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogin = async (data) => {
     try {
       const url = "http://localhost:1207/login";
@@ -27,7 +33,8 @@ const Login = ({ setShowLogin }) => {
       const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
-        console.log(data.message);
+        dispatch(updateProfile(data.data));
+        navigate("/");
       }
     } catch (error) {
       console.log(error.message);
@@ -88,16 +95,7 @@ const Login = ({ setShowLogin }) => {
         </span>
       </p>
       <p className="text-white font-thin my-1">or</p>
-      <p className="text-white font-thin my-1">connect with social accounts!</p>
-      <div className="w-6/12 flex justify-between items-center my-2 gap-x-5">
-        <FcGoogle className="w-8 h-8 " />
-        <FaGithub className="w-8 h-8 text-white" />
-        <img
-          src={linkedInLogo}
-          alt="linkedInLogo"
-          className="w-[30px] h-[30px]"
-        />
-      </div>
+      <SocialAcccounts />
     </form>
   );
 };

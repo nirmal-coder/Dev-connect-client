@@ -1,12 +1,11 @@
 import websiteLogo from "../../assets/website logo.png";
-import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
-import linkedInLogo from "../../assets/linkedIn.png";
-import { FcGoogle } from "react-icons/fc";
+
 import { useState } from "react";
 
 import FormInput from "./FormInput";
 import { useForm } from "react-hook-form";
 import PasswordInput from "./passwordInput";
+import SocialAcccounts from "./SocialAcccounts";
 
 const SignIn = ({ setShowLogin }) => {
   const {
@@ -77,7 +76,7 @@ const SignIn = ({ setShowLogin }) => {
               register={register}
               validation={{
                 required: "Last name is required!",
-                minLength: { value: 3, message: "Minimum 3 characters!" },
+                minLength: { value: 1, message: "Minimum 1 characters!" },
                 maxLength: { value: 25, message: "maximum 25 characters!" },
               }}
               error={errors.lastName}
@@ -127,22 +126,7 @@ const SignIn = ({ setShowLogin }) => {
         </span>
       </p>
       <p className="text-white font-thin my-1">or</p>
-      <p className="text-white font-thin my-1">connect with social accounts!</p>
-      <div className="w-6/12 flex justify-between items-center my-2 gap-x-5">
-        <button>
-          <FcGoogle className="w-8 h-8 " />
-        </button>
-        <button>
-          <FaGithub className="w-8 h-8 text-white" />
-        </button>
-        <button>
-          <img
-            src={linkedInLogo}
-            alt="linkedInLogo"
-            className="w-[30px] h-[30px]"
-          />
-        </button>
-      </div>
+      <SocialAcccounts />
     </form>
   );
 };

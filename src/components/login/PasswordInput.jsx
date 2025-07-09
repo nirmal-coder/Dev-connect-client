@@ -20,7 +20,7 @@ const PasswordInput = ({
       <label htmlFor="password" className="text-white font-semibold ">
         {label}
       </label>
-      <div className="w-full flex justify-between gap-x-2 items-center rounded-sm border border-gray-300 mt-2 px-3">
+      <div className="w-full flex justify-between gap-x-2 items-center rounded-sm border border-gray-300 mt-2 px-1">
         <input
           type={showPassword ? "text" : "password"}
           {...register(name, validation)}
