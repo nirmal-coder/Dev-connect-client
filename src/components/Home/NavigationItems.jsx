@@ -6,7 +6,7 @@ const NavigationItems = ({ name, path, icon }) => {
   console.log(pathname);
   return (
     <li className="list-none p-1">
-      <Link className={`no-underline  text-2xl `} path={path}>
+      <Link className={`no-underline  text-2xl `} to={path}>
         {icon}
       </Link>
     </li>

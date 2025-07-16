@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { updateProfile } from "../../store/userSlice";
 import { useNavigate } from "react-router";
 
-const Login = ({ setShowLogin }) => {
+const Login = () => {
   const {
     register,
     handleSubmit,
@@ -23,6 +23,7 @@ const Login = ({ setShowLogin }) => {
         headers: {
           "content-type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(data),
       };
 
@@ -30,7 +31,7 @@ const Login = ({ setShowLogin }) => {
       if (response.ok) {
         const data = await response.json();
         dispatch(updateProfile(data.data));
-        navigate("/");
+        navigate("/", { replace: true });
       }
     } catch (error) {
       console.log(error.message);
@@ -85,7 +86,7 @@ const Login = ({ setShowLogin }) => {
         Don't have account -{" "}
         <span
           className="text-blue-600 cursor-pointer"
-          onClick={() => setShowLogin(false)}
+          onClick={() => navigate("/register")}
         >
           Sign up
         </span>

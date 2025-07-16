@@ -1,12 +1,11 @@
-import Login from "../components/login/Login";
-import "../index.css";
+import SignIn from "../components/login/SignIn";
 
-const LoginPage = () => {
+const SigninPage = () => {
   return (
     <div className="w-screen min-h-screen flex flex-col justify-center items-center p-5 login-bg-container">
-      <Login />
+      <SignIn />
     </div>
   );
 };
 
-export default LoginPage;
+export default SigninPage;

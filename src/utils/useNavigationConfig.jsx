@@ -1,5 +1,5 @@
 import { FaUserFriends, FaUserTie } from "react-icons/fa";
-import { ImUserPlus } from "react-icons/im";
+import { IoMdNotifications } from "react-icons/io";
 import { LuMessageCircleCode } from "react-icons/lu";
 import { MdDynamicFeed } from "react-icons/md";
 import { useLocation } from "react-router";
@@ -16,9 +16,9 @@ const useNavigationConfig = () => {
       icon: <MdDynamicFeed className={classname("/")} />,
     },
     {
-      path: "/all-connections",
+      path: "/connections",
       name: "all-connections",
-      icon: <FaUserFriends className={classname("/all-connections")} />,
+      icon: <FaUserFriends className={classname("/connections")} />,
     },
     {
       path: "/message",
@@ -26,9 +26,9 @@ const useNavigationConfig = () => {
       icon: <LuMessageCircleCode className={classname("/message")} />,
     },
     {
-      path: "/connection-request",
-      name: "connectionRequest",
-      icon: <ImUserPlus className={classname("/connection-request")} />,
+      path: "/notifications",
+      name: "notifications",
+      icon: <IoMdNotifications className={classname("/notifications")} />,
     },
     {
       path: "/profile",

@@ -3,9 +3,12 @@ import websiteLogo from "../../assets/website logo.png";
 import profilePic from "../../assets/profile-image.webp";
 import { LuMessageCircleCode } from "react-icons/lu";
 import useScreenSize from "../../hooks/useScreenSize";
+import { useSelector } from "react-redux";
+import { IoIosLogOut, IoMdNotifications } from "react-icons/io";
 
 const Header = () => {
   const device = useScreenSize();
+  const user = useSelector((store) => store.user);
 
   console.log(location);
   return (
@@ -16,15 +19,18 @@ const Header = () => {
         className="h-12 md:h-14 object-contain py-2"
       />
 
-      {device === "desktop" ? (
-        <img
-          src={profilePic}
-          alt="profile picture"
-          className="w-8 h-8 rounded-[50%]"
-        />
-      ) : (
-        <LuMessageCircleCode className="text-gray-400 text-2xl" />
-      )}
+      <div className="flex items-center gap-x-3">
+        {device !== "mobile" && (
+          <>
+            <IoMdNotifications className="text-gray-300 text-2xl" />
+            <img
+              src={profilePic}
+              alt="profile picture"
+              className="w-8 h-8 rounded-[50%]"
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 };

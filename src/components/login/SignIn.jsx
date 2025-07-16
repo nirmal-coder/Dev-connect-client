@@ -6,8 +6,11 @@ import FormInput from "./FormInput";
 import { useForm } from "react-hook-form";
 import PasswordInput from "./passwordInput";
 import SocialAcccounts from "./SocialAcccounts";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../../store/userSlice";
 
-const SignIn = ({ setShowLogin }) => {
+const SignIn = () => {
   const {
     register,
     handleSubmit,
@@ -15,6 +18,8 @@ const SignIn = ({ setShowLogin }) => {
   } = useForm();
 
   const [serverErrorMsg, setServerErrorMsg] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogin = async (signinData) => {
     console.log(signinData);
@@ -32,7 +37,8 @@ const SignIn = ({ setShowLogin }) => {
       const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        dispatch(updateProfile(data.data));
+        navigate("/", { replace: true });
         setServerErrorMsg("");
       } else {
         throw new Error("Response was not ok!");
@@ -120,7 +126,7 @@ const SignIn = ({ setShowLogin }) => {
         Already have a account -{" "}
         <span
           className="text-blue-600 cursor-pointer"
-          onClick={() => setShowLogin(true)}
+          onClick={() => navigate("/login")}
         >
           Login!
         </span>
