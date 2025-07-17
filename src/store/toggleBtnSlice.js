@@ -4,7 +4,7 @@ const toggleBtnSlice = createSlice({
   name: "toggleBtn",
   initialState: {
     connectionToggle: true,
-    messageToggle: true,
+    messageToggle: false,
   },
   reducers: {
     toggleConnection: (state, action) => {

@@ -2,7 +2,7 @@ import React from "react";
 
 const Message = () => {
   return (
-    <div className="w-full h-full bg-black text-white  md:w-5/12 lg:w-4/12 md:border md:border-gray-100 min-h-[80vh] text-center">
+    <div className="w-full h-full bg-black text-white lg:w-3/12 min-h-[85vh] text-center rounded-xl">
       Messages
     </div>
   );

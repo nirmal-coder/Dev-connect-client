@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import "../../index.css";
 import TabItems from "./TabItems";
+import ConnectionRequest from "./ConnectionRequest";
+import AllConnections from "./AllConnections";
 
 const Connection = () => {
   const [currentTab, setCurrentTab] = useState("all-connections");
-  const [allConnectData, setAllConnectionData] = useState(null);
 
   const handleTabs = (id) => {
     setCurrentTab(id);
@@ -20,26 +22,9 @@ const Connection = () => {
     },
   ];
 
-  const getAllConnection = async () => {
-    try {
-      const url = "http://localhost:1207/user/connections";
-      const response = await fetch(url, { credentials: "include" });
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  useEffect(() => {
-    getAllConnection();
-  }, []);
-
   return (
-    <div className="w-full h-full bg-black md:w-5/12 lg:w-4/12 transition-all duration-[3s]">
-      <div className="w-full bg-black grid grid-cols-2 text-white">
+    <div className="w-full h-full bg-black lg:w-4/12 md:border md:border-gray-600 md:min-h-[85vh] rounded-xl">
+      <div className="w-full bg-black grid grid-cols-2 text-white rounded-xl">
         {tabObj.map((each) => (
           <TabItems
             name={each.name}
@@ -49,6 +34,13 @@ const Connection = () => {
             currentTab={currentTab}
           />
         ))}
+      </div>
+      <div className="w-full p-3">
+        {currentTab === "all-connections" ? (
+          <AllConnections />
+        ) : (
+          <ConnectionRequest />
+        )}
       </div>
     </div>
   );

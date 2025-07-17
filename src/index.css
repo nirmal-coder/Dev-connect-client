@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  overflow: hidden;
+}
+
 .login-bg-container {
   background-image: linear-gradient(
       to right bottom,
