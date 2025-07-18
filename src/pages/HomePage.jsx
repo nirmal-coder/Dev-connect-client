@@ -1,5 +1,5 @@
 import Header from "../components/Home/header";
-
+import "../index.css";
 import { Outlet } from "react-router";
 import Navigation from "../components/Home/Navigation";
 import useScreenSize from "../hooks/useScreenSize";
@@ -11,34 +11,20 @@ import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const device = useScreenSize();
-  const toggleConnection = useSelector(
-    (store) => store.toggleBtn.connectionToggle
-  );
-  const toggleMessage = useSelector((store) => store.toggleBtn.messageToggle);
-
-  const tabletUi = (
-    <>
-      {toggleConnection && <Connection />}
-      <Feed />
-      {toggleMessage && <Message />}
-    </>
-  );
 
   const desktopUi = (
     <>
       <Connection />
       <Feed />
-      <Message />
     </>
   );
 
   return (
     <div className="w-screen min-h-screen bg-black">
       <Header />
-      {/* {device === "tablet" && <ToggleHeader />} */}
 
       {device === "desktop" && (
-        <div className="w-full flex justify-between lg:p-6">{desktopUi}</div>
+        <div className="w-full grid grid-cols-3 lg:p-2">{desktopUi}</div>
       )}
 
       {(device === "mobile" || device === "tablet") && <Outlet />}

@@ -23,7 +23,7 @@ const Connection = () => {
   ];
 
   return (
-    <div className="w-full h-full bg-black lg:w-4/12 md:border md:border-gray-600 md:min-h-[85vh] rounded-xl">
+    <div className="w-full h-full lg:w-12/12 md:border-2 md:border-gray-600 lg:h-[85vh] rounded-lg col-span-1">
       <div className="w-full bg-black grid grid-cols-2 text-white rounded-xl">
         {tabObj.map((each) => (
           <TabItems
@@ -35,7 +35,7 @@ const Connection = () => {
           />
         ))}
       </div>
-      <div className="w-full p-3">
+      <div className="w-full p-3 overflow-y-auto">
         {currentTab === "all-connections" ? (
           <AllConnections />
         ) : (

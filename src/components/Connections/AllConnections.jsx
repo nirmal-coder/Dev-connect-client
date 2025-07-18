@@ -11,7 +11,7 @@ const AllConnections = () => {
   }, []);
 
   return (
-    <ul className="list-none pl-0 flex flex-col items-center p-2">
+    <ul className="list-none flex flex-col items-center p-2">
       {connections ? (
         connections.map((each) => (
           <ProfileCards data={each} key={each.id} type="connections" />

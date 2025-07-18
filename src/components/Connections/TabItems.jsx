@@ -6,7 +6,7 @@ const TabItems = ({ currentTab, name, handleTabs, id }) => {
       onClick={() => handleTabs(id)}
       className={`${
         currentTab === id
-          ? "bg-gray-950 text-white font-medium border-b-2  border-red-600 "
+          ? "bg-black text-white font-medium border-b-2  border-red-600 "
           : "border-0 text-white"
       } ${
         currentTab === "all-connections" ? "rounded-tl-xl" : "rounded-tr-xl"

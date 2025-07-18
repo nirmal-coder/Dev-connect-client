@@ -12,11 +12,11 @@ const Header = () => {
 
   console.log(location);
   return (
-    <div className="w-full h-16 bg-gray-900 flex justify-between items-center p-5">
+    <div className="w-full h-16 lg:h-18 bg-gray-900 flex justify-between items-center p-5">
       <img
         src={websiteLogo}
         alt="website logo dev connect"
-        className="h-12 md:h-14 object-contain py-2"
+        className="h-12 md:h-14 lg:h-18 object-contain py-2"
       />
 
       <div className="flex items-center gap-x-3">
