@@ -23,7 +23,7 @@ const Connection = () => {
   ];
 
   return (
-    <div className="w-full h-full lg:w-12/12 md:border-2 md:border-gray-600 lg:h-[85vh] rounded-lg col-span-1">
+    <div className="w-full h-full lg:w-12/12 lg:border-2 lg:border-gray-600 lg:h-[80vh] rounded-lg col-span-1">
       <div className="w-full bg-black grid grid-cols-2 text-white rounded-xl">
         {tabObj.map((each) => (
           <TabItems

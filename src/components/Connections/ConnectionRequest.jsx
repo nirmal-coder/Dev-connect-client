@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllConnectionRequests } from "../../utils/dataFetching";
 import ProfileCards from "./ProfileCards";
+import ShimmerForConnectionCard from "../../utils/shimmerForConnectionCard";
 
 const ConnectionRequest = () => {
   const connectionRequests = useSelector(
@@ -13,13 +14,13 @@ const ConnectionRequest = () => {
     getAllConnectionRequests(dispatch);
   }, []);
   return (
-    <ul className="list-none pl-0 flex flex-col items-center p-2">
-      {connectionRequests ? (
+    <ul className="list-none pl-0 flex flex-col items-center p-2 md:px-6 md:py-3 lg:p-1">
+      {connectionRequests && connectionRequests.length > 0 ? (
         connectionRequests.map((each) => (
           <ProfileCards data={each} key={each.id} type="Request" />
         ))
       ) : (
-        <h1 className="text-white">No Connection Requests</h1>
+        <ShimmerForConnectionCard />
       )}
     </ul>
   );

@@ -1,13 +1,12 @@
-import Header from "../components/Home/header";
+import Header from "../components/Home/Header";
 import "../index.css";
 import { Outlet } from "react-router";
 import Navigation from "../components/Home/Navigation";
 import useScreenSize from "../hooks/useScreenSize";
-import ToggleHeader from "../components/Home/ToggleHeader";
+
 import Connection from "../components/Connections/Connection";
-import Message from "../components/Home/Message";
+
 import Feed from "../components/Home/Feed";
-import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const device = useScreenSize();
@@ -24,7 +23,9 @@ const HomePage = () => {
       <Header />
 
       {device === "desktop" && (
-        <div className="w-full grid grid-cols-3 lg:p-2">{desktopUi}</div>
+        <div className="w-full grid content-center h-[calc(100vh-70px)] grid-cols-3 lg:p-2 items-center">
+          {desktopUi}
+        </div>
       )}
 
       {(device === "mobile" || device === "tablet") && <Outlet />}
